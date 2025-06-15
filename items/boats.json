@@ -1,0 +1,46 @@
+{
+    "boats": [
+        {
+            "name": "15' Johnboat",
+            "length": 15.0,
+            "width": 3.2,
+            "emptyWeight": 280,
+            "maxSpeed": 25,
+            "maxPower": 15,
+            "drag": 0.99775,
+            "fuelCapacityGallons": 8.5,
+            "fuelTankLocation": [
+                0,
+                13.8
+            ],
+            "engineMount": "outboard",
+            "engineMountPoints": [
+                [
+                    0,
+                    20
+                ]
+            ]
+        },
+        {
+            "name": "20' River John",
+            "length": 20.0,
+            "width": 5.1,
+            "emptyWeight": 595,
+            "maxSpeed": 35,
+            "maxPower": 95,
+            "drag": 0.99775,
+            "fuelCapacityGallons": 100,
+            "fuelTankLocation": [
+                0,
+                0
+            ],
+            "engineMount": "outboard",
+            "engineMountPoints": [
+                [
+                    0,
+                    20
+                ]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,76 @@
+{
+    "engines": [
+        {
+            "name": "Jawnsen 10hp",
+            "mount": "outboard",
+            "power": 10,
+            "idlePower": 0.75,
+            "idleRPM": 900,
+            "ratedRPM": 5200,
+            "sfc": 0.275,
+            "fuelType": "gas",
+            "engineType": "twoStroke",
+            "cost": 13100
+        },
+        {
+            "name": "Jawnsen 15hp",
+            "mount": "outboard",
+            "power": 15,
+            "idlePower": 1.1,
+            "idleRPM": 850,
+            "ratedRPM": 5500,
+            "sfc": 0.252,
+            "fuelType": "gas",
+            "engineType": "twoStroke",
+            "cost": 13900
+        },
+        {
+            "name": "Jawnsen 25hp",
+            "mount": "outboard",
+            "power": 20,
+            "idlePower": 1.2,
+            "idleRPM": 800,
+            "ratedRPM": 5800,
+            "sfc": 0.221,
+            "fuelType": "gas",
+            "engineType": "twoStroke",
+            "cost": 14750
+        },
+        {
+            "name": "Yawahaw 35hp",
+            "mount": "outboard",
+            "power": 35,
+            "idlePower": 1.5,
+            "idleRPM": 750,
+            "ratedRPM": 6000,
+            "sfc": 0.225,
+            "fuelType": "gas",
+            "engineType": "twoStroke",
+            "cost": 17900
+        },
+        {
+            "name": "Jawnsen 75hp",
+            "mount": "outboard",
+            "power": 75,
+            "idlePower": 3.8,
+            "idleRPM": 750,
+            "ratedRPM": 5900,
+            "sfc": 0.237,
+            "fuelType": "gas",
+            "engineType": "fourStroke",
+            "cost": 39500
+        },
+        {
+            "name": "Yawahaw 75hp",
+            "mount": "outboard",
+            "power": 75,
+            "idlePower": 4.5,
+            "idleRPM": 750,
+            "ratedRPM": 6000,
+            "sfc": 0.229,
+            "fuelType": "gas",
+            "engineType": "fourStroke",
+            "cost": 44200
+        }
+    ]
+}
