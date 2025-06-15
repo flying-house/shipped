@@ -22,49 +22,40 @@ const (
 
 // Vessel -
 type Vessel struct {
-	// Position and movement
 	X, Y                 float64
 	Heading              float64
 	VelocityX, VelocityY float64
 	AngularVelocity      float64
-
-	// Control systems
-	Gear           int
-	Throttle       float64
-	RudderRate     float64
-	RudderAngle    float64
-	RudderLimit    float64
-	LastGearChange time.Time
-	GearCooldown   time.Duration
-
-	// Hull specifications (from boat component)
-	Length              float64
-	Width               float64
-	EmptyWeight         float64
-	MaxSpeed            float64
-	MaxPower            float64 // Maximum power the hull can handle
-	Drag                float64
-	FuelCapacityGallons float64
-	FuelTankLocationX   float64
-	FuelTankLocationY   float64
-	EngineMount         string
-	EngineMountPoints   [][2]float64
-
-	// Physics properties (calculated from components)
-	Mass            float64 // Total mass including fuel, cargo, etc.
-	CenterOfMassX   float64 // Calculated center of mass
-	CenterOfMassY   float64
-	MomentOfInertia float64 // Calculated from mass distribution
-	RotationalDrag  float64
-
-	// Engine system
-	Engines             []*Engine
-	TotalInstalledPower float64 // Sum of all engine power
-	MaxThrust           float64 // Calculated from engines and hull
-	CurrentSpeed        float64
+	Gear                 int
+	Throttle             float64
+	RudderRate           float64
+	RudderAngle          float64
+	RudderLimit          float64
+	LastGearChange       time.Time
+	GearCooldown         time.Duration
+	Length               float64
+	Width                float64
+	EmptyWeight          float64
+	MaxSpeed             float64
+	MaxPower             float64
+	Drag                 float64
+	FuelCapacityGallons  float64
+	FuelTankLocationX    float64
+	FuelTankLocationY    float64
+	EngineMount          string
+	EngineMountPoints    [][2]float64
+	Mass                 float64
+	CenterOfMassX        float64
+	CenterOfMassY        float64
+	MomentOfInertia      float64
+	RotationalDrag       float64
+	Engines              []*Engine
+	TotalInstalledPower  float64
+	MaxThrust            float64
+	CurrentSpeed         float64 // m/s
 }
 
-// NewVessel creates a vessel from boat and engine specifications
+// NewVessel -
 func NewVessel(x, y float64, boatSpec map[string]interface{}, engineSpecs []map[string]interface{}) *Vessel {
 	v := &Vessel{
 		X:              x,
@@ -78,19 +69,14 @@ func NewVessel(x, y float64, boatSpec map[string]interface{}, engineSpecs []map[
 		RotationalDrag: 0.985,
 	}
 
-	// Load hull specifications
 	v.loadHullSpecs(boatSpec)
-
-	// Load and install engines
 	v.loadEngines(engineSpecs)
-
-	// Calculate derived properties
 	v.calculatePhysicsProperties()
 
 	return v
 }
 
-// loadHullSpecs loads boat specifications from JSON data
+// loadHullSpecs -
 func (v *Vessel) loadHullSpecs(spec map[string]interface{}) {
 	v.Length = spec["length"].(float64)
 	v.Width = spec["width"].(float64)
@@ -100,13 +86,11 @@ func (v *Vessel) loadHullSpecs(spec map[string]interface{}) {
 	v.Drag = spec["drag"].(float64)
 	v.FuelCapacityGallons = spec["fuelCapacityGallons"].(float64)
 	v.EngineMount = spec["engineMount"].(string)
-
-	// Load fuel tank location
+	// fuel tank
 	fuelLoc := spec["fuelTankLocation"].([]interface{})
 	v.FuelTankLocationX = fuelLoc[0].(float64)
 	v.FuelTankLocationY = fuelLoc[1].(float64)
-
-	// Load engine mount points
+	// mount engines
 	mountPoints := spec["engineMountPoints"].([]interface{})
 	v.EngineMountPoints = make([][2]float64, len(mountPoints))
 	for i, point := range mountPoints {
@@ -117,14 +101,13 @@ func (v *Vessel) loadHullSpecs(spec map[string]interface{}) {
 		}
 	}
 
-	// Set rudder limit based on boat size (larger boats turn slower)
-	v.RudderLimit = 75.0 - (v.Length-15.0)*2.0 // Smaller boats turn sharper
+	v.RudderLimit = 75.0 - (v.Length-15.0)*2.0
 	if v.RudderLimit < 30.0 {
 		v.RudderLimit = 30.0
 	}
 }
 
-// loadEngines creates engine instances from specifications
+// loadEngines -
 func (v *Vessel) loadEngines(engineSpecs []map[string]interface{}) {
 	v.Engines = make([]*Engine, len(engineSpecs))
 	v.TotalInstalledPower = 0
